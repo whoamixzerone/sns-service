@@ -60,6 +60,6 @@
 ![wanted_pre_onboarding_assignment](https://user-images.githubusercontent.com/67082984/179905277-9eaa72c2-480c-4998-83e5-85b9c6aebd90.png)
 
 # DB ERD 설계
-![wanted_pre_onboarding_assignment_erd](https://user-images.githubusercontent.com/67082984/180088186-45fba9a0-bb72-435c-9182-cdd828a68888.png)
+![wanted_pre_onboarding_assignment_erd](https://user-images.githubusercontent.com/67082984/180101702-2b1a06c0-bff3-481f-bbd5-ae880ccba1ab.png)
 
 
