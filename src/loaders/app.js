@@ -1,12 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
+const passport = require('passport');
+
 const routes = require('../api/routes');
+const passportConfig = require('../api/middlewares/passport');
 
 const app = express();
+
+passportConfig();
 
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
 
 app.use('/api', routes);
 
