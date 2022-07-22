@@ -28,7 +28,33 @@ const updatePost = async (postDto) => {
   }
 };
 
+const deletePost = async (postDto) => {
+  try {
+    return await Post.destroy({ where: { id: postDto.id } });
+  } catch (err) {
+    console.error(err);
+    throw new APIError({
+      status: err.statusCode,
+      message: err.message,
+    });
+  }
+};
+
+const restorePost = async (postDto) => {
+  try {
+    return await Post.restore({ where: { id: postDto.id } });
+  } catch (err) {
+    console.error(err);
+    throw new APIError({
+      status: err.statusCode,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
+  deletePost,
+  restorePost,
 };

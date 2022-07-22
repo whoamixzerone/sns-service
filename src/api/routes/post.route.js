@@ -1,11 +1,15 @@
 const express = require('express');
 const { validate } = require('express-validation');
 const { postController } = require('../controllers');
-const { isVerifyToken, isAuthor } = require('../middlewares/auth.middleware');
+const {
+  isVerifyToken,
+  isAuthorPost,
+} = require('../middlewares/auth.middleware');
 const {
   createPost,
   updatePost,
   deletePost,
+  restorePost,
   getPost,
 } = require('../validations/post.validation');
 
@@ -17,12 +21,29 @@ router.post(
   isVerifyToken,
   postController.createPost,
 );
+
 router.patch(
   '/:id',
   validate(updatePost),
   isVerifyToken,
-  isAuthor,
+  isAuthorPost,
   postController.setPost,
+);
+
+router.delete(
+  '/:id',
+  validate(deletePost),
+  isVerifyToken,
+  isAuthorPost,
+  postController.delPost,
+);
+
+router.patch(
+  '/:id/restore',
+  validate(restorePost),
+  isVerifyToken,
+  isAuthorPost,
+  postController.restorePost,
 );
 
 module.exports = router;
