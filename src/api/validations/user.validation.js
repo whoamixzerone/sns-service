@@ -9,6 +9,7 @@ const createUser = {
   }),
 };
 
+// POST /api/user/signin
 const signIn = {
   body: Joi.object({
     email: Joi.string().email().required(),

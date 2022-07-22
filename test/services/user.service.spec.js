@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const httpMocks = require('node-mocks-http');
-const httpStatus = require('http-status');
 const userController = require('../../src/api/controllers/user.controller');
 const userService = require('../../src/api/services/user.service');
 const User = require('../../src/api/models/user.model');
