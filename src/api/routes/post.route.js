@@ -11,6 +11,11 @@ const {
 
 const router = express.Router();
 
-router.post('/', validate(createPost), isVerifyToken, postController.setPost);
+router.post(
+  '/',
+  validate(createPost),
+  isVerifyToken,
+  postController.createPost,
+);
 
 module.exports = router;

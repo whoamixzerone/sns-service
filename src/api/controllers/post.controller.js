@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const postService = require('../services/post.service');
 const common = require('../utils/common');
 
-const setPost = async (req, res, next) => {
+const createPost = async (req, res, next) => {
   const userDto = {
     ...req.body,
     ...req.userDto,
@@ -22,5 +22,5 @@ const setPost = async (req, res, next) => {
 };
 
 module.exports = {
-  setPost,
+  createPost,
 };
