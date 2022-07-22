@@ -11,7 +11,7 @@ const createPost = {
 // PATCH /api/posts/:id
 const updatePost = {
   params: Joi.object({
-    userId: Joi.string().required(),
+    id: Joi.string().required(),
   }),
   body: Joi.object({
     title: Joi.string().max(100),
@@ -22,14 +22,14 @@ const updatePost = {
 // DELETE /api/posts/:id
 const deletePost = {
   params: Joi.object({
-    userId: Joi.string().required(),
+    id: Joi.string().required(),
   }),
 };
 
 // GET /api/posts/:id
 const getPost = {
   params: Joi.object({
-    userId: Joi.string().required(),
+    id: Joi.string().required(),
   }),
 };
 

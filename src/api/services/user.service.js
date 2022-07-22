@@ -32,19 +32,13 @@ const createUser = async (userDto) => {
 
 const login = async (userDto) => {
   try {
-    const user = await User.findOne(
-      {
-        attirbutes: ['id', 'email', 'name'],
-      },
-      { where: userDto.email },
-    );
+    const user = await User.findOne({ where: { email: userDto.email } });
     if (!user) {
       return new APIError({
         status: httpStatus.NOT_FOUND,
         message: '존재하지 않는 사용자입니다',
       });
     }
-
     const isCompare = await bcrypt.compare(userDto.password, user.password);
     if (!isCompare) {
       return new APIError({
