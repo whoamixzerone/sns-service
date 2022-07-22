@@ -11,7 +11,7 @@ const Post = require('../models/post.model');
 const isVerifyToken = async (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {
-      console.error('>>>> middle', err);
+      console.error(err);
       return next(err);
     }
 
@@ -32,13 +32,13 @@ const isVerifyToken = async (req, res, next) => {
 /**
  * 작성자 검증 미들웨어
  */
-const isAuthor = async (req, res, next) => {
+const isAuthorPost = async (req, res, next) => {
   const postId =
     req.params.id !== Number ? Number(req.params.id) : req.params.id;
   const { userId } = req.userDto;
 
   try {
-    const post = await Post.findByPk(postId);
+    const post = await Post.findByPk(postId, { paranoid: false });
     if (post === null) {
       return next(
         new APIError({
@@ -52,7 +52,7 @@ const isAuthor = async (req, res, next) => {
       return next(
         new APIError({
           status: httpStatus.FORBIDDEN,
-          message: '작성자만 수정할 수 있습니다',
+          message: '해당 작성자만 할 수 있습니다',
         }),
       );
     }
@@ -66,5 +66,5 @@ const isAuthor = async (req, res, next) => {
 
 module.exports = {
   isVerifyToken,
-  isAuthor,
+  isAuthorPost,
 };

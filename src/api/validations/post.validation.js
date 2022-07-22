@@ -26,6 +26,13 @@ const deletePost = {
   }),
 };
 
+// PATCH /api/posts/:id/restore
+const restorePost = {
+  params: Joi.object({
+    id: Joi.string().required(),
+  }),
+};
+
 // GET /api/posts/:id
 const getPost = {
   params: Joi.object({
@@ -37,5 +44,6 @@ module.exports = {
   createPost,
   updatePost,
   deletePost,
+  restorePost,
   getPost,
 };
