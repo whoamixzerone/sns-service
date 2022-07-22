@@ -4,6 +4,10 @@ module.exports = class Post extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
+        writer: {
+          type: Sequelize.STRING(20),
+          allowNull: false,
+        },
         title: {
           type: Sequelize.STRING(100),
           allowNull: false,
@@ -11,16 +15,6 @@ module.exports = class Post extends Sequelize.Model {
         content: {
           type: Sequelize.STRING(255),
           allowNull: false,
-        },
-        views: {
-          type: Sequelize.INTEGER.UNSIGNED,
-          allowNull: false,
-          defaultValue: 0,
-        },
-        likes: {
-          type: Sequelize.INTEGER.UNSIGNED,
-          allowNull: false,
-          defaultValue: 0,
         },
       },
       {
@@ -36,6 +30,8 @@ module.exports = class Post extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Post.belongsTo(db.User);
+    db.Post.belongsTo(db.User, {
+      foreignKey: { name: 'userId', allowNull: false },
+    });
   }
 };
