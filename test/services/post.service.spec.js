@@ -14,6 +14,7 @@ beforeAll(() => {
   next = jest.fn();
 
   Post.create = jest.fn();
+  Post.update = jest.fn();
 });
 
 describe('Post Service CreatePost', () => {
@@ -22,15 +23,36 @@ describe('Post Service CreatePost', () => {
   });
 
   test('createPost 함수 호출', async () => {
-    const userDto = {
+    const postDto = {
       ...req.body,
       userId: 1,
       writer: '홍길동',
     };
-    Post.create.mockReturnValue(userDto);
-    await postService.createPost(userDto);
+    Post.create.mockReturnValue(postDto);
+    await postService.createPost(postDto);
 
     expect(Post.create).toBeCalledTimes(1);
-    expect(Post.create).toBeCalledWith(userDto);
+    expect(Post.create).toBeCalledWith(postDto);
+  });
+});
+
+describe('Post Service UpdatePost', () => {
+  test('updatePost 함수가 존재', () => {
+    expect(typeof postService.updatePost).toBe('function');
+  });
+
+  test('updatePost 함수 호출', async () => {
+    const postDto = {
+      id: 2,
+      userId: 1,
+      writer: '홍길동',
+      title: '게시글 제목',
+    };
+    Post.update.mockReturnValue([1]);
+    const result = await postService.updatePost(postDto);
+
+    expect(Post.update).toBeCalledTimes(1);
+    expect(Post.update).toBeCalledWith(postDto, { where: { id: postDto.id } });
+    expect(result).toStrictEqual([1]);
   });
 });
