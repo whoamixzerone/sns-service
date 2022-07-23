@@ -96,3 +96,29 @@ describe('Post Service RestorePost', () => {
     expect(result).toBe(Promise);
   });
 });
+
+describe('Post Service detailPost', () => {
+  test('detailPost 함수가 존재', () => {
+    expect(postService.detailPost).toBeDefined();
+  });
+
+  test('detailPost 함수 호출', async () => {
+    const postDto = {
+      id: 2,
+    };
+    const data = {
+      id: 2,
+      writer: '홍길동',
+      title: '게시글 제목',
+      content: '게시글 내용',
+      createdAt: '2022-07-22 06:53:01',
+      updatedAt: '2022-07-22 12:00:46',
+    };
+    Post.findByPk.mockReturnValue(data);
+    const result = await postService.detailPost(postDto);
+
+    expect(Post.findByPk).toBeCalledTimes(1);
+    expect(Post.findByPk).toBeCalledWith(postDto.id);
+    expect(result).toBe(data);
+  });
+});

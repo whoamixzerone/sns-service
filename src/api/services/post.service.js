@@ -52,9 +52,24 @@ const restorePost = async (postDto) => {
   }
 };
 
+const detailPost = async (postDto) => {
+  try {
+    return await Post.findByPk(postDto.id, {
+      attributes: { exclude: ['deletedAt', 'userId'] },
+    });
+  } catch (err) {
+    console.error(err);
+    throw new APIError({
+      status: err.statusCode,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
   deletePost,
   restorePost,
+  detailPost,
 };
