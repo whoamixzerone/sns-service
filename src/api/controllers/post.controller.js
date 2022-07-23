@@ -103,9 +103,34 @@ const restorePost = async (req, res, next) => {
   }
 };
 
+const getPost = async (req, res, next) => {
+  const postDto = {
+    id: strToNumberId(req.params.id),
+    ...req.userDto,
+  };
+
+  try {
+    const result = await postService.detailPost(postDto);
+    if (result === null) {
+      return next(
+        new APIError({
+          status: httpStatus.NOT_FOUND,
+          message: '해당 게시물을 찾을 수 없습니다',
+        }),
+      );
+    }
+
+    return res.status(httpStatus.OK).json(result);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+};
+
 module.exports = {
   createPost,
   setPost,
   delPost,
   restorePost,
+  getPost,
 };
