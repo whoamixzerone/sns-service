@@ -66,10 +66,25 @@ const detailPost = async (postDto) => {
   }
 };
 
+const listPost = async () => {
+  try {
+    return await Post.findAll({
+      attributes: { exclude: ['deletedAt', 'userId'] },
+    });
+  } catch (err) {
+    console.error(err);
+    throw new APIError({
+      status: err.statusCode,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
   deletePost,
   restorePost,
   detailPost,
+  listPost,
 };

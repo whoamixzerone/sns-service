@@ -127,10 +127,22 @@ const getPost = async (req, res, next) => {
   }
 };
 
+const getPosts = async (req, res, next) => {
+  try {
+    const result = await postService.listPost();
+
+    return res.status(httpStatus.OK).json(result);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+};
+
 module.exports = {
   createPost,
   setPost,
   delPost,
   restorePost,
   getPost,
+  getPosts,
 };

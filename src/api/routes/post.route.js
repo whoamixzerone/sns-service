@@ -47,5 +47,6 @@ router.patch(
 );
 
 router.get('/:id', validate(getPost), isVerifyToken, postController.getPost);
+router.get('/', isVerifyToken, postController.getPosts);
 
 module.exports = router;
