@@ -57,9 +57,10 @@
 >> 사용자는 1 페이지 당 게시글 수를 조정할 수 있음(default: 10건)
 
 # API 설계
-![wanted_pre_onboarding_assignment](https://user-images.githubusercontent.com/67082984/179905277-9eaa72c2-480c-4998-83e5-85b9c6aebd90.png)
+![sns-service-api](https://user-images.githubusercontent.com/67082984/180637036-e5d818c4-edc6-4403-b249-a53881124030.png)
 
 # DB ERD 설계
-![wanted_pre_onboarding_assignment_erd](https://user-images.githubusercontent.com/67082984/180101702-2b1a06c0-bff3-481f-bbd5-ae880ccba1ab.png)
+![sns-service-erd](https://user-images.githubusercontent.com/67082984/180637041-5e72c0cc-8b8e-4047-bce6-732822610bc3.png)
+
 
 
