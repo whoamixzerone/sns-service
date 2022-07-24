@@ -2,8 +2,6 @@ const postService = require('../../src/api/services/post.service');
 const Post = require('../../src/api/models/post.model');
 
 let req;
-let res;
-let next;
 beforeAll(() => {
   req = {
     body: {
@@ -11,7 +9,6 @@ beforeAll(() => {
       content: '게시글 내용',
     },
   };
-  next = jest.fn();
 
   Post.create = jest.fn();
   Post.update = jest.fn();
@@ -120,5 +117,38 @@ describe('Post Service detailPost', () => {
     expect(Post.findByPk).toBeCalledTimes(1);
     expect(Post.findByPk).toBeCalledWith(postDto.id);
     expect(result).toBe(data);
+  });
+});
+
+describe('Post Service getPosts List', () => {
+  test('listPost 함수가 존재', () => {
+    expect(typeof postService.listPost).toBe('function');
+  });
+
+  test('listPost 함수 호출', async () => {
+    const data = [
+      {
+        id: 2,
+        writer: '홍길동',
+        title: '게시글 제목',
+        content: '게시글 내용',
+        createdAt: '2022-07-22 06:53:01',
+        updatedAt: '2022-07-22 12:00:46',
+      },
+      {
+        id: 3,
+        writer: '장보고',
+        title: '게시글',
+        content: '게시글',
+        createdAt: '2022-07-23 06:53:01',
+        updatedAt: '2022-07-23 12:00:46',
+      },
+    ];
+    Post.findAll.mockReturnValue(data);
+    const result = await postService.listPost();
+
+    expect(Post.findAll).toBeCalledTimes(1);
+    expect(Post.findAll).toBeCalledWith();
+    expect(result).toStrictEqual(data);
   });
 });
